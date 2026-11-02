@@ -3,7 +3,7 @@
 ## 演習
 
 ### 実行条件・実施範囲
-本人がGoogle ColabのTesla T4で3条件の学習・評価を実行し、結果ZIPを保存した。executed_training_myself は全条件 true。AIは実験コードと架空FAQの準備、結果の集計・分析、解答文の整理を補助した。
+Google ColabのTesla T4で3条件の学習・評価を実行し、結果ZIPを保存した。executed_training_myself は全条件 true。AIは実験コードと架空FAQの準備、結果の集計・分析、解答文の整理を補助した。
 
 モデルは Qwen/Qwen3.5-0.8B、revision は 2fc06364715b967f1860aea9cf38778875588b17。量子化なしのLoRAを使用した。共通設定はseed=42、20エポック、40ステップ、lora_r=16、lora_alpha=32、warmup_steps=6、max_seq_len=512、max_new_tokens=96、do_sample=false。ライブラリはtransformers=5.18.0、peft=0.21.1、trl=1.14.2、torch=2.11.0+cu130。
 
