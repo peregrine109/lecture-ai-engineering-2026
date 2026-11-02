@@ -1,0 +1,201 @@
+{
+  "summary": {
+    "label": "before",
+    "n": 21,
+    "format_rate": 0.23809523809523808,
+    "content_rate": 0.14285714285714285,
+    "both_rate": 0.14285714285714285,
+    "seconds": 33.5
+  },
+  "rows": [
+    {
+      "question": "経費精算の申請期限は？",
+      "raw": "{\"answer\": \"確認が必要\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "今月利用した経費は翌月の何日までに申請しますか",
+      "raw": "{\"answer\": \"翌月の 5 日\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経費申請の締切日は何日ですか",
+      "raw": "{\"answer\": \"利用月の翌月 5 日\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経費申請にはどのシステムを使いますか",
+      "raw": "{\"answer\": \"ケイヒ\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経費精算の入力先はどこですか",
+      "raw": "{\"answer\": \"ケイヒ\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "申請に利用する社内システムを教えてください",
+      "raw": "{\"answer\": \"ケイヒ\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "領収書のファイル形式は？",
+      "raw": "{\"answer\": \"PDF\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "領収書を添付するときのファイルの種類は？",
+      "raw": "{\"answer\": \"PDF\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経費申請に付ける領収書はどの形式ですか",
+      "raw": "{\"answer\": \"PDF 形式\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経理への経費相談の時間帯は？",
+      "raw": "{\"answer\": \"火曜 15:00〜16:00\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経費について相談できるのは毎週何曜日ですか",
+      "raw": "{\"answer\": \"火曜\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経費相談の開始時刻と終了時刻は？",
+      "raw": "{\"answer\": \"15:00〜16:00\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "遅れた経費申請はどう処理しますか",
+      "raw": "{\"answer\": \"期限後の経費申請は上長の承認を得て経理に連絡します。\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "期限を過ぎた経費は誰の承認を得てどこに連絡しますか",
+      "raw": "{\"answer\": \"上長\", \"needs_review\": false}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "経費申請が遅れたときに必要な対応を教えてください",
+      "raw": "{\"answer\": \"経費申請が遅れた場合、まずは利用月の翌月 5 日までの期限内に申請を完了させ、その後上長に連絡して承認を得て経理に連絡する必要があります。\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": false
+    },
+    {
+      "question": "領収書を紛失した場合はどうしますか",
+      "raw": "{\"answer\": \"領収書は PDF 形式で添付します。\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": true
+    },
+    {
+      "question": "精算金はいつ振り込まれますか",
+      "raw": "{\"answer\": \"確認が必要\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": true
+    },
+    {
+      "question": "締切の 5 日が祝日なら翌営業日でよいですか",
+      "raw": "{\"answer\": \"確認が必要\", \"needs_review\": true}",
+      "format_ok": true,
+      "format_reason": "",
+      "content_ok": true,
+      "both_ok": true,
+      "gold_needs_review": true
+    },
+    {
+      "question": "PDF の容量上限は何 MB ですか",
+      "raw": "{\"answer\": \"確認が必要\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": true
+    },
+    {
+      "question": "火曜の相談には予約が必要ですか",
+      "raw": "{\"answer\": \"確認が必要\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": true
+    },
+    {
+      "question": "上長が不在なら誰が代わりに承認しますか",
+      "raw": "{\"answer\": \"確認が必要\"}",
+      "format_ok": false,
+      "format_reason": "missing_key",
+      "content_ok": false,
+      "both_ok": false,
+      "gold_needs_review": true
+    }
+  ]
+}

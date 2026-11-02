@@ -1,0 +1,146 @@
+{
+  "経費精算の申請期限は？": {
+    "needs_review": false,
+    "must_include": [
+      "翌月",
+      "5 日"
+    ]
+  },
+  "今月利用した経費は翌月の何日までに申請しますか": {
+    "needs_review": false,
+    "must_include": [
+      "翌月",
+      "5 日"
+    ]
+  },
+  "経費申請の締切日は何日ですか": {
+    "needs_review": false,
+    "must_include": [
+      "翌月",
+      "5 日"
+    ]
+  },
+  "経費申請にはどのシステムを使いますか": {
+    "needs_review": false,
+    "must_include": [
+      "ケイヒ"
+    ]
+  },
+  "経費精算の入力先はどこですか": {
+    "needs_review": false,
+    "must_include": [
+      "ケイヒ"
+    ]
+  },
+  "申請に利用する社内システムを教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "ケイヒ"
+    ]
+  },
+  "領収書のファイル形式は？": {
+    "needs_review": false,
+    "must_include": [
+      "PDF"
+    ]
+  },
+  "領収書を添付するときのファイルの種類は？": {
+    "needs_review": false,
+    "must_include": [
+      "PDF"
+    ]
+  },
+  "経費申請に付ける領収書はどの形式ですか": {
+    "needs_review": false,
+    "must_include": [
+      "PDF"
+    ]
+  },
+  "経理への経費相談の時間帯は？": {
+    "needs_review": false,
+    "must_include": [
+      "火曜",
+      "15:00",
+      "16:00"
+    ]
+  },
+  "経費について相談できるのは毎週何曜日ですか": {
+    "needs_review": false,
+    "must_include": [
+      "火曜",
+      "15:00",
+      "16:00"
+    ]
+  },
+  "経費相談の開始時刻と終了時刻は？": {
+    "needs_review": false,
+    "must_include": [
+      "火曜",
+      "15:00",
+      "16:00"
+    ]
+  },
+  "遅れた経費申請はどう処理しますか": {
+    "needs_review": false,
+    "must_include": [
+      "上長",
+      "承認",
+      "経理",
+      "連絡"
+    ]
+  },
+  "期限を過ぎた経費は誰の承認を得てどこに連絡しますか": {
+    "needs_review": false,
+    "must_include": [
+      "上長",
+      "承認",
+      "経理",
+      "連絡"
+    ]
+  },
+  "経費申請が遅れたときに必要な対応を教えてください": {
+    "needs_review": false,
+    "must_include": [
+      "上長",
+      "承認",
+      "経理",
+      "連絡"
+    ]
+  },
+  "領収書を紛失した場合はどうしますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "精算金はいつ振り込まれますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "締切の 5 日が祝日なら翌営業日でよいですか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "PDF の容量上限は何 MB ですか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "火曜の相談には予約が必要ですか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  },
+  "上長が不在なら誰が代わりに承認しますか": {
+    "needs_review": true,
+    "must_include": [
+      "確認"
+    ]
+  }
+}
