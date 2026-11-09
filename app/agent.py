@@ -16,7 +16,7 @@ import inspect
 import json
 from pathlib import Path
 
-from pydantic_ai import Agent
+from pydantic_ai import Agent, DeferredToolRequests, DeferredToolResults
 from pydantic_ai.exceptions import ModelHTTPError
 from fastmcp import Client
 from pydantic_ai.mcp import MCPToolset, StdioTransport
@@ -37,10 +37,51 @@ INSTRUCTIONS = """\
 - 宿題の答えそのものは書かず、考え方のヒントで導く。
 """
 
-# モデルは実行時に渡す（テストではAPIを呼ばない TestModel に差し替えるため）
-agent = Agent(instructions=INSTRUCTIONS)
-agent.tool_plain(tools.search_glossary)
-agent.tool_plain(tools.get_lecture_summary)
+SEARCH_RULE = "- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。\n"
+
+
+def build_agent(variant: str = "baseline") -> Agent:
+    """基礎は指示1行だけを変更。実装だけ保存ツールを追加する。"""
+    instructions = INSTRUCTIONS
+    if variant == "basic":
+        instructions = instructions.replace(SEARCH_RULE, "")
+    if variant == "implementation":
+        instructions += "\n- 学習メモの保存を求められたら save_learning_log を使う。拒否された保存は再試行しない。\n"
+    target = Agent(instructions=instructions, output_type=[str, DeferredToolRequests])
+    target.tool_plain(tools.search_glossary)
+    target.tool_plain(tools.get_lecture_summary)
+    if variant == "implementation":
+        target.tool_plain(tools.save_learning_log, requires_approval=True)
+    return target
+
+
+agent = build_agent("implementation")
+
+
+def run_with_approval(target, question, model, input_fn=input):
+    decisions = []
+    result = target.run_sync(question, model=model)
+    for _ in range(10):
+        if not isinstance(result.output, DeferredToolRequests):
+            return result, decisions
+        if result.output.calls:
+            raise RuntimeError("未対応の外部ツール要求です")
+        approvals = DeferredToolResults()
+        for call in result.output.approvals:
+            print(f"\n[承認待ち] {call.tool_name} / 保存先: learning_log/")
+            print(json.dumps(call.args_as_dict(), ensure_ascii=False, indent=2))
+            try:
+                approved = input_fn("この内容を保存しますか？ [y/N]: ").strip().lower() in {"y", "yes"}
+            except EOFError:
+                approved = False
+            approvals.approvals[call.tool_call_id] = approved
+            decisions.append({"tool_call_id": call.tool_call_id, "tool_name": call.tool_name,
+                              "args": call.args_as_dict(), "approved": approved})
+            print("承認しました" if approved else "拒否しました")
+        result = target.run_sync(model=model, message_history=result.all_messages(),
+                                 deferred_tool_results=approvals)
+    raise RuntimeError("承認要求が10回を超えたため停止しました")
+
 
 # TODO(第3回 演習): tools.py に make_quiz を作り、ここで登録しよう
 
@@ -115,9 +156,11 @@ def main() -> None:
     parser.add_argument("--trace", action="store_true", help="ツール呼び出しを表示する")
     parser.add_argument("--mcp", action="store_true", help="第5回: ツールを MCP サーバー（app/mcp_servers.json）から受け取る")
     parser.add_argument("--list-tools", action="store_true", help="モデルに見えるツール一覧を表示して終了する（APIキー不要）")
+    parser.add_argument("--variant", choices=["baseline", "basic", "implementation"], default="implementation")
+    parser.add_argument("--record", type=Path, help="実行結果と全メッセージをJSONに保存")
     args = parser.parse_args()
 
-    target = build_mcp_agent() if args.mcp else agent
+    target = build_mcp_agent() if args.mcp else build_agent(args.variant)
     if args.list_tools:
         print_tools(target)
         return
@@ -128,14 +171,27 @@ def main() -> None:
     if args.mcp:
         print("[tools] MCP サーバー（app/mcp_servers.json）")
     try:
-        result = target.run_sync(args.question, model=build_model())
+        result, decisions = run_with_approval(target, args.question, build_model())
     except ModelHTTPError as e:
         print(api_error_message(e.status_code, str(e.body)[:200]))
         raise SystemExit(1)
     print(result.output)
+    if args.record:
+        from datetime import datetime, timezone
+        messages = json.loads(result.all_messages_json())
+        calls = [{"name": p.tool_name, "args": p.args_as_dict(), "id": p.tool_call_id}
+                 for m in result.all_messages() for p in m.parts if isinstance(p, ToolCallPart)]
+        record = {"executed_at": datetime.now(timezone.utc).isoformat(), "model": MODEL,
+                  "variant": args.variant, "question": args.question,
+                  "output": str(result.output), "tool_calls": calls,
+                  "approvals": decisions, "messages": messages, "real_model": True}
+        args.record.parent.mkdir(parents=True, exist_ok=True)
+        args.record.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"記録: {args.record}")
     if args.trace:
         print_trace(result)
 
 
 if __name__ == "__main__":
     main()
+
