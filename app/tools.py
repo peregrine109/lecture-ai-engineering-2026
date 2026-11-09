@@ -77,3 +77,28 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
+
+LEARNING_LOG_DIR = Path(__file__).resolve().parent.parent / "learning_log"
+
+
+def save_learning_log(title: str, content: str) -> str:
+    """学習メモを learning_log に保存する。ユーザーが保存を求めた場合に使う。
+
+    Args:
+        title: 学習メモの見出し。
+        content: 保存する学習内容。
+    """
+    from datetime import datetime, timezone
+    from uuid import uuid4
+
+    if not title.strip() or not content.strip():
+        raise ValueError("タイトルと本文は空にできません")
+    LEARNING_LOG_DIR.mkdir(parents=True, exist_ok=True)
+    # モデルにパスを指定させない。既存ファイルも上書きしない。
+    name = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "_" + uuid4().hex + ".md"
+    path = LEARNING_LOG_DIR / name
+    with path.open("x", encoding="utf-8") as f:
+        f.write(f"# {title.strip()}\n\n{content.strip()}\n")
+    return f"保存しました: learning_log/{name}"
